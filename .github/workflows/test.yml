@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  - push
+  - workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        uses: xu-cheng/texlive-action@v2
+        with:
+          scheme: small
+          run: |
+            env
+            unset $(env | egrep '^GITHUB|^RUNNER|^ACTIONS|^HOST|^CI|^INPUT|°SHLVL' |awk -F'=' '{print $1}')
+            echo "Cleaned environment:"
+            env
