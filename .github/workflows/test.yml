@@ -17,3 +17,14 @@ jobs:
             unset $(env | egrep '^GITHUB|^RUNNER|^ACTIONS|^HOST|^CI|^INPUT|°SHLVL' |awk -F'=' '{print $1}')
             echo "Cleaned environment:"
             env
+
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xu-cheng/texlive-action@v2
+        with:
+          docker_image: ghcr.io/xu-cheng/texlive-full:20230801
+          run: |
+            apk add make
+            echo "foo"
